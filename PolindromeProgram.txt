@@ -1,0 +1,50 @@
+
+import java.util.Scanner;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class PolindromeProgram
+{
+	// This function will be calculating the shortest polindrome word and the number of 
+	// characters to be added
+	public static int shortestPalindrome(String stringInput, int num) {
+		int lengthOfString = stringInput.length()/2;
+		int loopCount = 0;
+		int start = 0;
+		int end = stringInput.length()-1;
+		while (stringInput.charAt(start) != stringInput.charAt(end)) {
+			if (start == 0)
+				stringInput += stringInput.charAt(start);
+			else {
+				stringInput = stringInput.substring(0,start) + stringInput.charAt(end) + stringInput.substring(start);
+			}
+			loopCount++;
+			
+			start = start+1;
+			end = stringInput.length()-(start+1);
+			lengthOfString = stringInput.length()/2;
+			if (loopCount >= lengthOfString) 
+				break;
+		}
+		System.out.println("The new String created " + stringInput);
+		return stringInput.length() - num;
+		
+	}
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		// your code goes here
+		System.out.println("Please enter the Total Number of Characters in the word");
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		if (!((num >= 3) && (num <= 5000))) {
+			System.out.println("The input total number of Characters in the word need to be within 3 to 5000");
+			System.exit(0);
+		} else {
+			System.out.println("Please enter the String ");
+			String inputString  = in.next();	
+			System.out.println("Minimum number of characters need to add with the original Word " + 
+			new PolindromeProgram().shortestPalindrome(inputString, num));
+		}
+	
+	}
+}
